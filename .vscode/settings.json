@@ -1,0 +1,24 @@
+{
+    "cmake.options.statusBarVisibility": "visible",
+    "files.associations": {
+        "new": "cpp",
+        "cstdint": "cpp",
+        "initializer_list": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "chrono": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "iterator": "cpp",
+        "random": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
+    }
+}
