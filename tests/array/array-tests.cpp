@@ -68,24 +68,22 @@ TEST_CASE("Simple C static array works") {
   std::vector<int> v(10, 0);
 }
 
-
 class A {  // NOLINT
   int i;
+
  public:
-  explicit A(int i): i(i) { LOG(info) << "Constuctor of A is called " << i; }
-  A(const A & rhs):i(rhs.i) {
+  explicit A(int i) : i(i) { LOG(info) << "Constuctor of A is called " << i; }
+  A(const A& rhs) : i(rhs.i) {
     LOG(info) << "Copy Constuctor of A is called from " << i;
   }
 
-  A& operator = (const A & rhs) {
+  A& operator=(const A& rhs) {
     this->i = rhs.i;
     LOG(info) << "Copy Assignment of A is called from " << i;
     return *this;
   }
 
-  bool operator==(const A & rhs) const {
-    return i == rhs.i;
-  }
+  bool operator==(const A& rhs) const { return i == rhs.i; }
   ~A() { LOG(info) << "Destructor of A is called for " << i; }
 };
 
@@ -93,9 +91,9 @@ TEST_CASE("array works with custom types works") {
   BOOST_LOG_NAMED_SCOPE("array-custom-class-test");
   const Array<A> c(5, A(0));
   Array<A> d = {A(1), A(2), A(3)};
-  LOG(info)<< "Copy Assignement test";
-  d[1] = A(15);   // Assigment
-  LOG(info)<< "Copy Assignement ends";
+  LOG(info) << "Copy Assignement test";
+  d[1] = A(15);  // Assigment
+  LOG(info) << "Copy Assignement ends";
   CHECK(c[0] == A(0));
   CHECK(d[1] == A(15));
 }
@@ -111,4 +109,16 @@ TEST_CASE("array should copy") {
 
   const Array<A> f = {A(10)};
   e = f;
+  CHECK(e[0] == A(10));
+}
+
+TEST_CASE("2d - array should work") {
+  BOOST_LOG_NAMED_SCOPE("2d-array-test");
+  // Create a 3x4 Array
+  Array<Array<int>> a(3, Array<int>(4, 0));
+  a[0][0] = 5;
+  a[2][3] = 7;
+
+  CHECK(a[0][0] == 5);
+  CHECK(a[2][3] == 7);
 }
