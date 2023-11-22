@@ -7,9 +7,9 @@ We want to make a dynamic array class
 Array(10)  => Allocate the array of 10 element in heap, When this object gets deleted
 It will automatically delete all the stuff
 */
-#include <utility>
-#include <cstdint>
 #include <boost/log/trivial.hpp>
+#include <cstdint>
+#include <utility>
 
 #include "util-logger.hpp"
 
@@ -31,17 +31,18 @@ class Array {
   // Copy constuctor which solves the double free issue
   // Also we want to make we have actual copy of data
   // pointing to different arrays.
-  Array(const Array<T> & rhs) {
+  Array(const Array<T>& rhs) {
     length = rhs.length;
     data = reinterpret_cast<T*>(malloc(sizeof(T) * length));
-     for (uint32_t i = 0; i < length; i++) {
+    for (uint32_t i = 0; i < length; i++) {
+
       new (data + i) T(rhs[i]);
     }
   }
 
   // Assignment operator which will clean up existing array data
   // and copy the data from rhs.
-  Array<T> & operator = (const Array<T> & rhs) {
+  Array<T>& operator=(const Array<T>& rhs) {
     // copy and swap idiom
     Array<T> tmpCopy(rhs);
     std::swap(this->data, tmpCopy.data);
@@ -51,7 +52,7 @@ class Array {
     return *this;
   }
 
-  Array(const std::initializer_list<T> & list) {
+  Array(const std::initializer_list<T>& list) {
     length = list.size();
     data = reinterpret_cast<T*>(malloc(sizeof(T) * length));
     uint32_t i = 0;
@@ -68,9 +69,7 @@ class Array {
     free(data);
   }
 
-  uint32_t size() const {
-    return length;
-  }
+  uint32_t size() const { return length; }
 
   T& operator[](uint32_t index) {
     LOG(debug) << "non-const version of [] operator is being used";

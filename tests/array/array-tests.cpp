@@ -73,8 +73,9 @@ class A {  // NOLINT
 
  public:
   explicit A(int i) : i(i) { LOG(info) << "Constuctor of A is called " << i; }
+
   A(const A& rhs) : i(rhs.i) {
-    LOG(info) << "Copy Constuctor of A is called from " << i;
+    LOG(info) << "Copy Constuctor of A is called from " << i << " " << &i;
   }
 
   A& operator=(const A& rhs) {
