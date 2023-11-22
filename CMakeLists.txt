@@ -21,9 +21,14 @@ set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=-*,modernize-*,bugprone-*, cppcoreg
 add_executable(cpp-array-tests tests/array/array-tests.cpp )
 target_link_libraries(cpp-array-tests PRIVATE Catch2::Catch2 boost_log boost_log_setup boost_thread pthread)
 
+add_executable(cpp-vector-tests tests/vector/vector-tests.cpp )
+target_link_libraries(cpp-vector-tests PRIVATE Catch2::Catch2 boost_log boost_log_setup boost_thread pthread)
+
+
 set (CMAKE_CXX_FLAGS "-g -Wall -DBOOST_LOG_DYN_LINK -DMAX_LOG_LEVEL=debug")
 
 # `make test` will run all the tests  
 include(CTest)
 include(Catch)
 catch_discover_tests(cpp-array-tests)
+catch_discover_tests(cpp-vector-tests)
