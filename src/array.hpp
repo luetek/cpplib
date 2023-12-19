@@ -35,7 +35,6 @@ class Array {
     length = rhs.length;
     data = reinterpret_cast<T*>(malloc(sizeof(T) * length));
     for (uint32_t i = 0; i < length; i++) {
-
       new (data + i) T(rhs[i]);
     }
   }
