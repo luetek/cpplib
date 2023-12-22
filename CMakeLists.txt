@@ -27,6 +27,9 @@ target_link_libraries(cpp-vector-tests PRIVATE Catch2::Catch2 boost_log boost_lo
 add_executable(cpp-list-tests tests/list/list-tests.cpp )
 target_link_libraries(cpp-list-tests PRIVATE Catch2::Catch2 boost_log boost_log_setup boost_thread pthread)
 
+add_executable(cpp-deque-tests tests/deque/deque-tests.cpp )
+target_link_libraries(cpp-deque-tests PRIVATE Catch2::Catch2 boost_log boost_log_setup boost_thread pthread)
+
 set (CMAKE_CXX_FLAGS "-g -Wall -DBOOST_LOG_DYN_LINK -DMAX_LOG_LEVEL=debug")
 
 # `make test` will run all the tests  
